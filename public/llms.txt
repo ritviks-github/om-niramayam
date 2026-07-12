@@ -1,0 +1,19 @@
+# Om Niramayam
+
+> Premium furnished flats (1 BHK & 1 RK) for rent in Dwarka Sector 7, New Delhi. Fully furnished rooms with AC, fridge, washing machine, 24/7 biometric security, and high-speed WiFi, located near Palam Metro Station (Magenta Line) and Sector 9 Metro Station (Blue Line).
+
+Om Niramayam offers two room types: a 1 BHK (₹22,000/month) and a 1 RK studio (₹15,000/month), both fully furnished. The property is in Dwarka Sector 7, New Delhi, within a 5-minute walk of gyms (Gold's Gym, Cult.fit), restaurants (Kali Ghata, Prism, Xero Degrees), fast food (Pizza Hut, Domino's), and shopping (Nike, Bata, Reliance Trends).
+
+## Pages
+
+- [Rooms](/#rooms): Details, photos, and pricing for the 1 BHK and 1 RK room types.
+- [Amenities](/#amenities): Full list of in-room and property amenities.
+- [Neighbourhood](/#neighbourhood): Nearby metro stations, restaurants, gyms, and shopping.
+- [Gallery](/#gallery): Photos of the property.
+- [FAQ](/#faq): Common questions about location, pricing, and amenities.
+- [Contact](/#contact): Address, phone number, map, and enquiry form.
+
+## Contact
+
+- Address: D1/36,37, Ramphal Chowk Road, Palam Extension, Dwarka Sector 7, New Delhi
+- Phone: +91 80765 79885

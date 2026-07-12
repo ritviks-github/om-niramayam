@@ -243,7 +243,7 @@ function GoldenParticles() {
     tick();
     return () => { cancelAnimationFrame(id); window.removeEventListener("resize", resize); };
   }, []);
-  return <canvas ref={ref} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1 }} />;
+  return <canvas ref={ref} role="presentation" aria-hidden="true" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", pointerEvents: "none", zIndex: 1 }} />;
 }
 
 /* ─── Navbar ─────────────────────────────────────────────────── */
@@ -258,7 +258,7 @@ function NavBar() {
   }, []);
   const links = ["Rooms", "Amenities", "Neighbourhood", "Gallery", "FAQ", "Contact"];
   return (
-    <nav style={{
+    <nav aria-label="Primary" style={{
       position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
       padding: isMobile ? "14px 20px" : "16px 48px",
       display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -269,7 +269,7 @@ function NavBar() {
       flexWrap: "wrap",
     }}>
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        <span style={{ fontSize: 20, filter: `drop-shadow(0 0 4px ${GOLD})` }}>ॐ</span>
+        <span aria-hidden="true" style={{ fontSize: 20, filter: `drop-shadow(0 0 4px ${GOLD})` }}>ॐ</span>
         <div>
           <div style={{ fontFamily: "'Cinzel',serif", fontSize: isMobile ? 13 : 16, fontWeight: 700, color: GOLD, letterSpacing: 2, lineHeight: 1 }}>OM NIRAMAYAM</div>
           <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 9, color: GOLD_DIM, letterSpacing: 3 }}>DWARKA · NEW DELHI</div>
@@ -297,13 +297,16 @@ function NavBar() {
 
       {isMobile && (
         <button onClick={() => setMenuOpen(o => !o)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-nav-menu"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
           style={{ background: "none", border: `1px solid rgba(201,168,76,0.4)`, padding: "6px 10px", cursor: "pointer", color: GOLD, fontFamily: "'Cinzel',serif", fontSize: 12, letterSpacing: 1 }}>
           {menuOpen ? "✕" : "☰"}
         </button>
       )}
 
       {isMobile && menuOpen && (
-        <div style={{ width: "100%", display: "flex", flexDirection: "column", borderTop: `1px solid rgba(201,168,76,0.12)`, marginTop: 12, paddingTop: 12, gap: 4 }}>
+        <div id="mobile-nav-menu" style={{ width: "100%", display: "flex", flexDirection: "column", borderTop: `1px solid rgba(201,168,76,0.12)`, marginTop: 12, paddingTop: 12, gap: 4 }}>
           {[...links, "Book Now"].map(item => (
             <a key={item} href={`#${item.toLowerCase().replace(/\s+/g, "")}`}
               onClick={() => setMenuOpen(false)}
@@ -321,7 +324,7 @@ function NavBar() {
 function SectionLabel({ children }) {
   return (
     <div style={{ textAlign: "center", marginBottom: 48 }}>
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 14 }}>
+      <div aria-hidden="true" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16, marginBottom: 14 }}>
         <div style={{ height: 1, width: 50, background: `linear-gradient(to right,transparent,${GOLD})` }} />
         <span style={{ color: GOLD_DIM, fontSize: 10, fontFamily: "'Cinzel',serif" }}>◆</span>
         <div style={{ height: 1, width: 50, background: `linear-gradient(to left,transparent,${GOLD})` }} />
@@ -344,16 +347,16 @@ function HeroSection() {
       background: `radial-gradient(ellipse at 50% 30%,#1a1200 0%,${BLACK} 60%)`,
     }}>
       <GoldenParticles />
-      <div style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-50%)", width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%)`, pointerEvents: "none" }} />
+      <div aria-hidden="true" style={{ position: "absolute", top: "40%", left: "50%", transform: "translate(-50%,-50%)", width: 500, height: 500, borderRadius: "50%", background: `radial-gradient(circle,rgba(201,168,76,0.05) 0%,transparent 70%)`, pointerEvents: "none" }} />
 
       <div style={{ position: "relative", zIndex: 2, textAlign: "center", width: "100%", maxWidth: 720 }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginBottom: 28 }}>
+        <div aria-hidden="true" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginBottom: 28 }}>
           <div style={{ height: 1, width: 60, background: `linear-gradient(to right,transparent,${GOLD})` }} />
           <span style={{ color: GOLD, fontSize: 9, letterSpacing: 5, fontFamily: "'Cinzel',serif" }}>DWARKA SECTOR 7 · NEW DELHI</span>
           <div style={{ height: 1, width: 60, background: `linear-gradient(to left,transparent,${GOLD})` }} />
         </div>
 
-        <div style={{ position: "relative", width: 100, height: 100, margin: "0 auto 20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div aria-hidden="true" style={{ position: "relative", width: 100, height: 100, margin: "0 auto 20px", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ position: "absolute", inset: 0, borderRadius: "50%", background: `radial-gradient(circle,rgba(201,168,76,0.25) 0%,transparent 70%)`, animation: "omPulse 2s ease-in-out infinite" }} />
           <div style={{ width: 88, height: 88, borderRadius: "50%", border: `2px solid ${GOLD}`, display: "flex", alignItems: "center", justifyContent: "center", background: `radial-gradient(circle at center,#1a1200 0%,${BLACK} 100%)`, boxShadow: `0 0 28px rgba(201,168,76,0.4),0 0 56px rgba(201,168,76,0.12)`, position: "relative", zIndex: 1 }}>
             <span style={{ fontSize: 46, lineHeight: 1, filter: `drop-shadow(0 0 7px ${GOLD})` }}>ॐ</span>
@@ -386,7 +389,7 @@ function HeroSection() {
         </div>
       </div>
 
-      <div style={{ position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 5, opacity: 0.4 }}>
+      <div aria-hidden="true" style={{ position: "absolute", bottom: 28, left: "50%", transform: "translateX(-50%)", zIndex: 2, display: "flex", flexDirection: "column", alignItems: "center", gap: 5, opacity: 0.4 }}>
         <span style={{ fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 4, color: GOLD }}>SCROLL</span>
         <div style={{ width: 1, height: 36, background: `linear-gradient(to bottom,${GOLD},transparent)`, animation: "scrollLine 1.6s ease-in-out infinite" }} />
       </div>
@@ -411,12 +414,8 @@ function RoomModal({ room, onClose, isMobile }) {
   // If there are no photos at all, default straight to the video tab.
   useEffect(() => {
     if (!hasImages && hasVideo) setTab("video");
-    console.log(vbhk1);
   }, [hasImages, hasVideo]);
 
-  // Pause + release the video whenever we leave the video tab, switch clips, or close the modal,
-  // so the browser stops buffering/decoding it in the background (this was the main cause of lag).
-  
   // Close on Escape key
   useEffect(() => {
     const onKey = (e) => { if (e.key === "Escape") onClose(); };
@@ -427,6 +426,9 @@ function RoomModal({ room, onClose, isMobile }) {
   return (
     <div
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${room.name} details`}
       style={{
         position: "fixed", inset: 0, background: "rgba(0,0,0,0.86)",
         display: "flex", alignItems: "center", justifyContent: "center",
@@ -457,7 +459,7 @@ function RoomModal({ room, onClose, isMobile }) {
           </div>
           <button
             onClick={onClose}
-            aria-label="Close"
+            aria-label="Close room details"
             style={{
               background: "transparent", border: `1px solid rgba(201,168,76,0.4)`,
               color: GOLD, width: 34, height: 34, cursor: "pointer", fontSize: 16,
@@ -474,10 +476,12 @@ function RoomModal({ room, onClose, isMobile }) {
 
           {/* Tab strip — only shown when there's actually a choice to make */}
           {hasImages && hasVideo && (
-            <div style={{ display: "flex", gap: 4, marginTop: 16, marginBottom: 14 }}>
+            <div role="tablist" aria-label="Room media" style={{ display: "flex", gap: 4, marginTop: 16, marginBottom: 14 }}>
               {[["photos", "PHOTOS"], ["video", "VIDEO TOUR"]].map(([key, label]) => (
                 <button
                   key={key}
+                  role="tab"
+                  aria-selected={tab === key}
                   onClick={() => setTab(key)}
                   style={{
                     fontFamily: "'Cinzel',serif", fontSize: 9, letterSpacing: 2,
@@ -506,7 +510,7 @@ function RoomModal({ room, onClose, isMobile }) {
                 {hasImages ? (
                   <img
                     src={room.images[activeImg]}
-                    alt={`${room.name} photo ${activeImg + 1}`}
+                    alt={`${room.name} photo ${activeImg + 1} of ${room.images.length}`}
                     loading="lazy"
                     style={{
                       width: "100%",
@@ -518,7 +522,7 @@ function RoomModal({ room, onClose, isMobile }) {
                   />
                 ) : (
                   <>
-                    <span style={{ fontSize: 40, opacity: 0.25, filter: GOLD_EMOJI }}>{room.emoji}</span>
+                    <span aria-hidden="true" style={{ fontSize: 40, opacity: 0.25, filter: GOLD_EMOJI }}>{room.emoji}</span>
                     <span style={{ fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 2, color: "rgba(201,168,76,0.3)" }}>
                       PHOTOS COMING SOON
                     </span>
@@ -528,20 +532,23 @@ function RoomModal({ room, onClose, isMobile }) {
 
               {/* Thumbnails */}
               {hasImages && room.images.length > 1 && (
-                <div style={{ display: "flex", gap: 8, marginBottom: 28, flexWrap: "wrap" }}>
+                <div role="group" aria-label={`${room.name} photo thumbnails`} style={{ display: "flex", gap: 8, marginBottom: 28, flexWrap: "wrap" }}>
                   {room.images.map((img, i) => (
-                    <div
+                    <button
                       key={i}
+                      type="button"
                       onClick={() => setActiveImg(i)}
+                      aria-label={`Show photo ${i + 1} of ${room.images.length}`}
+                      aria-pressed={activeImg === i}
                       style={{
-                        width: 66, height: 66, cursor: "pointer",
+                        width: 66, height: 66, cursor: "pointer", padding: 0,
                         border: `1px solid ${activeImg === i ? GOLD : "rgba(201,168,76,0.2)"}`,
-                        opacity: activeImg === i ? 1 : 0.55,
+                        opacity: activeImg === i ? 1 : 0.55, background: "none",
                         overflow: "hidden", transition: "opacity 0.25s, border-color 0.25s",
                       }}
                     >
                       <img src={img} alt="" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
-                    </div>
+                    </button>
                   ))}
                 </div>
               )}
@@ -560,15 +567,18 @@ function RoomModal({ room, onClose, isMobile }) {
                 controls
                 preload="metadata"
                 playsInline
+                aria-label={`${room.name} video tour, clip ${activeVideo + 1} of ${videoList.length}`}
                 style={{ width: "100%", aspectRatio: "16/9", border: "1px solid rgba(201,168,76,0.15)", background: "black", display: "block" }}
                 src={videoList[activeVideo]}
               />
               {videoList.length > 1 && (
-                <div style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
+                <div role="group" aria-label="Video tour clips" style={{ display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" }}>
                   {videoList.map((_, i) => (
                     <button
                       key={i}
                       onClick={() => setActiveVideo(i)}
+                      aria-label={`Play clip ${i + 1} of ${videoList.length}`}
+                      aria-pressed={activeVideo === i}
                       style={{
                         fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 1.5,
                         padding: "7px 14px", cursor: "pointer",
@@ -594,11 +604,11 @@ function RoomModal({ room, onClose, isMobile }) {
           {/* Features */}
           <div style={{ marginBottom: 24 }}>
             <div style={{ fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.4)", marginBottom: 10 }}>INCLUDES</div>
-            <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+            <ul style={{ display: "flex", gap: 6, flexWrap: "wrap", listStyle: "none" }}>
               {room.features.map(f => (
-                <span key={f} style={{ padding: "4px 11px", background: "rgba(201,168,76,0.06)", border: "1px solid rgba(201,168,76,0.15)", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 1.5, color: "rgba(201,168,76,0.65)" }}>{f}</span>
+                <li key={f} style={{ padding: "4px 11px", background: "rgba(201,168,76,0.06)", border: "1px solid rgba(201,168,76,0.15)", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 1.5, color: "rgba(201,168,76,0.65)" }}>{f}</li>
               ))}
-            </div>
+            </ul>
           </div>
 
           {/* Price + CTA */}
@@ -661,7 +671,7 @@ function RoomsSection() {
                 />
               ) : (
                 <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 6 }}>
-                  <span style={{ fontSize: 40, opacity: 0.25, filter: GOLD_EMOJI }}>{room.emoji}</span>
+                  <span aria-hidden="true" style={{ fontSize: 40, opacity: 0.25, filter: GOLD_EMOJI }}>{room.emoji}</span>
                   <span style={{ fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 2, color: "rgba(201,168,76,0.3)" }}>PHOTO COMING SOON</span>
                 </div>
               )}
@@ -670,11 +680,11 @@ function RoomsSection() {
             <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: "rgba(245,215,142,0.5)", lineHeight: 1.75, margin: "0 0 20px" }}>{room.desc}</p>
             <div style={{ marginBottom: 8 }}>
               <div style={{ fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.4)", marginBottom: 10 }}>INCLUDES</div>
-              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+              <ul style={{ display: "flex", gap: 6, flexWrap: "wrap", listStyle: "none" }}>
                 {room.features.map(f => (
-                  <span key={f} style={{ padding: "4px 11px", background: "rgba(201,168,76,0.06)", border: "1px solid rgba(201,168,76,0.15)", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 1.5, color: "rgba(201,168,76,0.65)" }}>{f}</span>
+                  <li key={f} style={{ padding: "4px 11px", background: "rgba(201,168,76,0.06)", border: "1px solid rgba(201,168,76,0.15)", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 1.5, color: "rgba(201,168,76,0.65)" }}>{f}</li>
                 ))}
-              </div>
+              </ul>
             </div>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 12, marginTop: 24, paddingTop: 20, borderTop: "1px solid rgba(201,168,76,0.1)" }}>
               <div>
@@ -683,6 +693,8 @@ function RoomsSection() {
               </div>
               <button
                 onClick={() => setModalRoom(room)}
+                aria-haspopup="dialog"
+                aria-label={`View details for ${room.name}`}
                 style={{ fontFamily: "'Cinzel',serif", fontSize: 9, letterSpacing: 2, padding: "11px 22px", background: hov === room.id ? `linear-gradient(135deg,${GOLD} 0%,${GOLD_DIM} 100%)` : "transparent", border: `1px solid ${GOLD}`, color: hov === room.id ? BLACK : GOLD, cursor: "pointer", transition: "all 0.3s", fontWeight: hov === room.id ? 700 : 400 }}
               >
                 VIEW ROOM
@@ -713,7 +725,7 @@ function AmenitiesSection() {
           <div key={a.label}
             onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)}
             style={{ padding: isMobile ? "24px 16px" : "28px 16px", background: hov === i ? "rgba(201,168,76,0.05)" : "rgba(201,168,76,0.02)", border: `1px solid ${hov === i ? "rgba(201,168,76,0.28)" : "rgba(201,168,76,0.07)"}`, transition: "all 0.3s", textAlign: "center" }}>
-            <div style={{ fontSize: isMobile ? 26 : 28, marginBottom: 10, filter: GOLD_EMOJI }}>{a.icon}</div>
+            <div aria-hidden="true" style={{ fontSize: isMobile ? 26 : 28, marginBottom: 10, filter: GOLD_EMOJI }}>{a.icon}</div>
             <div style={{ fontFamily: "'Cinzel',serif", fontSize: isMobile ? 9 : 10, fontWeight: 600, color: GOLD, letterSpacing: 1, marginBottom: 5 }}>{a.label}</div>
             <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 11, color: "rgba(245,215,142,0.35)", lineHeight: 1.5 }}>{a.desc}</div>
           </div>
@@ -740,9 +752,11 @@ function NeighbourhoodSection() {
       </p>
 
       {/* Tab strip */}
-      <div style={{ display: "flex", gap: 4, maxWidth: 900, margin: "0 auto 36px", flexWrap: "wrap", justifyContent: "center" }}>
+      <div role="tablist" aria-label="Neighbourhood categories" style={{ display: "flex", gap: 4, maxWidth: 900, margin: "0 auto 36px", flexWrap: "wrap", justifyContent: "center" }}>
         {neighbourhood.map((n, i) => (
           <button key={n.category}
+            role="tab"
+            aria-selected={activeTab === i}
             onClick={() => setActiveTab(i)}
             style={{
               fontFamily: "'Cinzel',serif", fontSize: isMobile ? 8 : 9, letterSpacing: 2,
@@ -752,16 +766,16 @@ function NeighbourhoodSection() {
               color: activeTab === i ? BLACK : "rgba(201,168,76,0.6)",
               cursor: "pointer", transition: "all 0.25s", fontWeight: activeTab === i ? 700 : 400,
             }}>
-            <span style={{ marginRight: 6,filter: GOLD_EMOJI,display: "inline-block" }}>{n.icon}</span>{n.category.toUpperCase()}
+            <span aria-hidden="true" style={{ marginRight: 6,filter: GOLD_EMOJI,display: "inline-block" }}>{n.icon}</span>{n.category.toUpperCase()}
           </button>
         ))}
       </div>
 
       {/* Active panel */}
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
-        <div style={{ border: "1px solid rgba(201,168,76,0.18)", background: "rgba(201,168,76,0.02)", padding: isMobile ? 24 : 40 }}>
+        <div role="tabpanel" style={{ border: "1px solid rgba(201,168,76,0.18)", background: "rgba(201,168,76,0.02)", padding: isMobile ? 24 : 40 }}>
           <div style={{ marginBottom: 28 }}>
-            <span style={{ fontSize: 32, filter: GOLD_EMOJI }}>{cat.icon}</span>
+            <span aria-hidden="true" style={{ fontSize: 32, filter: GOLD_EMOJI }}>{cat.icon}</span>
             <div style={{ fontFamily: "'Cinzel',serif", fontSize: isMobile ? 16 : 20, color: GOLD_L, letterSpacing: 1, marginTop: 10 }}>{cat.category}</div>
             <div style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: 14, color: "rgba(245,215,142,0.4)", marginTop: 4 }}>{cat.tagline}</div>
           </div>
@@ -769,7 +783,7 @@ function NeighbourhoodSection() {
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "1fr 1fr" : "repeat(3,1fr)", gap: 12 }}>
             {cat.places.map((p, i) => (
               <div key={i} style={{ padding: "18px 20px", background: "rgba(201,168,76,0.03)", border: "1px solid rgba(201,168,76,0.1)", display: "flex", alignItems: "flex-start", gap: 14 }}>
-                <div style={{ width: 6, height: 6, borderRadius: "50%", background: GOLD, marginTop: 6, flexShrink: 0 }} />
+                <div aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: GOLD, marginTop: 6, flexShrink: 0 }} />
                 <div>
                   <div style={{ fontFamily: "'Cinzel',serif", fontSize: 11, color: GOLD, letterSpacing: 1, marginBottom: 3 }}>{p.name}</div>
                   <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13, color: "rgba(245,215,142,0.45)", marginBottom: 6 }}>{p.detail}</div>
@@ -877,7 +891,7 @@ function GalleryCell({ p, style }) {
     >
       <img
   src={p.image}
-  alt=""
+  alt="Om Niramayam furnished flat interior"
   loading="lazy"
   style={{
     width: "100%",
@@ -905,22 +919,29 @@ function FAQSection() {
         Everything you need to know about living at Om Niramayam — from location and pricing to amenities and daily life.
       </p>
       <div style={{ maxWidth: 820, margin: "0 auto", display: "flex", flexDirection: "column", gap: 2 }}>
-        {faqs.map((faq, i) => (
-          <div key={i}
-            style={{ border: `1px solid ${open === i ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.1)"}`, background: open === i ? "rgba(201,168,76,0.03)" : "transparent", transition: "all 0.3s" }}>
-            <button
-              onClick={() => setOpen(open === i ? null : i)}
-              style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "18px 20px" : "22px 28px", background: "none", border: "none", cursor: "pointer", gap: 16 }}>
-              <span style={{ fontFamily: "'Cinzel',serif", fontSize: isMobile ? 10 : 12, letterSpacing: 1, color: open === i ? GOLD_L : "rgba(245,215,142,0.75)", textAlign: "left", lineHeight: 1.5 }}>{faq.q}</span>
-              <span style={{ color: GOLD, fontSize: 16, flexShrink: 0, transform: open === i ? "rotate(45deg)" : "none", transition: "transform 0.3s", display: "inline-block" }}>+</span>
-            </button>
-            {open === i && (
-              <div style={{ padding: isMobile ? "0 20px 20px" : "0 28px 24px", fontFamily: "'Cormorant Garamond',serif", fontSize: isMobile ? 14 : 16, color: "rgba(245,215,142,0.55)", lineHeight: 1.8, borderTop: "1px solid rgba(201,168,76,0.08)", paddingTop: 16 }}>
-                {faq.a}
-              </div>
-            )}
-          </div>
-        ))}
+        {faqs.map((faq, i) => {
+          const panelId = `faq-panel-${i}`;
+          const buttonId = `faq-button-${i}`;
+          return (
+            <div key={i}
+              style={{ border: `1px solid ${open === i ? "rgba(201,168,76,0.35)" : "rgba(201,168,76,0.1)"}`, background: open === i ? "rgba(201,168,76,0.03)" : "transparent", transition: "all 0.3s" }}>
+              <button
+                id={buttonId}
+                onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+                aria-controls={panelId}
+                style={{ width: "100%", display: "flex", justifyContent: "space-between", alignItems: "center", padding: isMobile ? "18px 20px" : "22px 28px", background: "none", border: "none", cursor: "pointer", gap: 16 }}>
+                <span style={{ fontFamily: "'Cinzel',serif", fontSize: isMobile ? 10 : 12, letterSpacing: 1, color: open === i ? GOLD_L : "rgba(245,215,142,0.75)", textAlign: "left", lineHeight: 1.5 }}>{faq.q}</span>
+                <span aria-hidden="true" style={{ color: GOLD, fontSize: 16, flexShrink: 0, transform: open === i ? "rotate(45deg)" : "none", transition: "transform 0.3s", display: "inline-block" }}>+</span>
+              </button>
+              {open === i && (
+                <div id={panelId} role="region" aria-labelledby={buttonId} style={{ padding: isMobile ? "0 20px 20px" : "0 28px 24px", fontFamily: "'Cormorant Garamond',serif", fontSize: isMobile ? 14 : 16, color: "rgba(245,215,142,0.55)", lineHeight: 1.8, borderTop: "1px solid rgba(201,168,76,0.08)", paddingTop: 16 }}>
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );
@@ -932,7 +953,7 @@ function EmbeddedMap({ isMobile }) {
     <div style={{ marginTop: 32 }}>
       <div style={{ fontFamily: "'Cinzel',serif", fontSize: 9, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 10 }}>LOCATION ON MAP</div>
       <div style={{ width: "100%", height: isMobile ? 220 : 280, border: "1px solid rgba(201,168,76,0.25)", overflow: "hidden", position: "relative", background: "#0d0d0d" }}>
-        <div style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, boxShadow: "inset 0 0 20px rgba(201,168,76,0.07)" }} />
+        <div aria-hidden="true" style={{ position: "absolute", inset: 0, pointerEvents: "none", zIndex: 2, boxShadow: "inset 0 0 20px rgba(201,168,76,0.07)" }} />
         <iframe
           title="Om Niramayam Location — Dwarka Sector 7, New Delhi, near Palam Metro Station"
           src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3503.514849429991!2d77.06830217549903!3d28.584327675691085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjjCsDM1JzAzLjYiTiA3N8KwMDQnMTUuMiJF!5e0!3m2!1sen!2sin!4v1781966950423!5m2!1sen!2sin"
@@ -1047,7 +1068,7 @@ function LocationSection() {
             { icon: "🚇", title: "Metro Access", content: "Palam Station (Magenta Line) — 10–15 min by auto\nSector 9 Station (Blue Line) — 10–15 min by auto" },
           ].map(({ icon, title, content }) => (
             <div key={title} style={{ display: "flex", gap: 18, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid rgba(201,168,76,0.09)" }}>
-              <span style={{ fontSize: 18, lineHeight: 1, flexShrink: 0, filter: GOLD_EMOJI }}>{icon}</span>
+              <span aria-hidden="true" style={{ fontSize: 18, lineHeight: 1, flexShrink: 0, filter: GOLD_EMOJI }}>{icon}</span>
               <div>
                 <div style={{ fontFamily: "'Cinzel',serif", fontSize: 9, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 5 }}>{title.toUpperCase()}</div>
                 <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 15, color: "rgba(245,215,142,0.7)", lineHeight: 1.65, whiteSpace: "pre-line" }}>{content}</div>
@@ -1060,85 +1081,99 @@ function LocationSection() {
         <div style={{ background: "rgba(201,168,76,0.03)", border: "1px solid rgba(201,168,76,0.14)", padding: isMobile ? 24 : 36 }}>
           <div style={{ fontFamily: "'Cinzel',serif", fontSize: 17, color: GOLD_L, letterSpacing: 2, marginBottom: 24 }}>Reserve Your Stay</div>
 
-          <div style={{ marginBottom: 16 }}>
-            <label style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>FULL NAME</label>
-            <input
-              type="text"
-              value={form.name}
-              onChange={handleChange("name")}
-              style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
-              onFocus={e => e.target.style.borderColor = GOLD}
-              onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
-            />
-          </div>
+          <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} noValidate>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="enquiry-name" style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>FULL NAME</label>
+              <input
+                id="enquiry-name"
+                name="name"
+                type="text"
+                autoComplete="name"
+                value={form.name}
+                onChange={handleChange("name")}
+                style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
+                onFocus={e => e.target.style.borderColor = GOLD}
+                onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
+              />
+            </div>
 
-          <div style={{ marginBottom: 16 }}>
-            <label style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>PHONE NUMBER</label>
-            <input
-              type="text"
-              value={form.phone}
-              onChange={handleChange("phone")}
-              style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
-              onFocus={e => e.target.style.borderColor = GOLD}
-              onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
-            />
-          </div>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="enquiry-phone" style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>PHONE NUMBER</label>
+              <input
+                id="enquiry-phone"
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                value={form.phone}
+                onChange={handleChange("phone")}
+                style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
+                onFocus={e => e.target.style.borderColor = GOLD}
+                onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
+              />
+            </div>
 
-          <div style={{ marginBottom: 16 }}>
-            <label style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>CHECK-IN DATE</label>
-            <input
-              type="date"
-              value={form.checkin}
-              min={todayStr}
-              max={maxDateStr}
-              onChange={handleChange("checkin")}
-              style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
-              onFocus={e => e.target.style.borderColor = GOLD}
-              onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
-            />
-          </div>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="enquiry-checkin" style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>CHECK-IN DATE</label>
+              <input
+                id="enquiry-checkin"
+                name="checkin"
+                type="date"
+                value={form.checkin}
+                min={todayStr}
+                max={maxDateStr}
+                onChange={handleChange("checkin")}
+                style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
+                onFocus={e => e.target.style.borderColor = GOLD}
+                onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
+              />
+            </div>
 
-          <div style={{ marginBottom: 16 }}>
-            <label style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>DURATION OF STAY (MONTHS)</label>
-            <input
-              type="number"
-              min="1"
-              max="60"
-              step="1"
-              placeholder="e.g. 6"
-              value={form.duration}
-              onChange={handleChange("duration")}
-              style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
-              onFocus={e => e.target.style.borderColor = GOLD}
-              onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
-            />
-          </div>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="enquiry-duration" style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>DURATION OF STAY (MONTHS)</label>
+              <input
+                id="enquiry-duration"
+                name="duration"
+                type="number"
+                min="1"
+                max="60"
+                step="1"
+                placeholder="e.g. 6"
+                value={form.duration}
+                onChange={handleChange("duration")}
+                style={{ width: "100%", padding: "12px 14px", background: "rgba(201,168,76,0.04)", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", colorScheme: "dark" }}
+                onFocus={e => e.target.style.borderColor = GOLD}
+                onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}
+              />
+            </div>
 
-          <div style={{ marginBottom: 16 }}>
-            <label style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>ROOM TYPE</label>
-            <select
-              value={form.roomType}
-              onChange={handleChange("roomType")}
-              style={{ width: "100%", padding: "12px 14px", background: "#111", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", cursor: "pointer" }}
-              onFocus={e => e.target.style.borderColor = GOLD}
-              onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}>
-              <option value="">Select a room</option>
-              <option value="1bhk">1 BHK — ₹22,000/month</option>
-              <option value="1rk">1 RK — ₹15,000/month</option>
-            </select>
-          </div>
+            <div style={{ marginBottom: 16 }}>
+              <label htmlFor="enquiry-roomtype" style={{ display: "block", fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 3, color: "rgba(201,168,76,0.45)", marginBottom: 7 }}>ROOM TYPE</label>
+              <select
+                id="enquiry-roomtype"
+                name="roomType"
+                value={form.roomType}
+                onChange={handleChange("roomType")}
+                style={{ width: "100%", padding: "12px 14px", background: "#111", border: "1px solid rgba(201,168,76,0.18)", color: GOLD_L, fontFamily: "'Cormorant Garamond',serif", fontSize: 15, outline: "none", boxSizing: "border-box", cursor: "pointer" }}
+                onFocus={e => e.target.style.borderColor = GOLD}
+                onBlur={e => e.target.style.borderColor = "rgba(201,168,76,0.18)"}>
+                <option value="">Select a room</option>
+                <option value="1bhk">1 BHK — ₹22,000/month</option>
+                <option value="1rk">1 RK — ₹15,000/month</option>
+              </select>
+            </div>
 
-          {error && (
-            <div style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13, color: "#e08a8a", marginBottom: 16 }}>{error}</div>
-          )}
+            {error && (
+              <div role="alert" style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13, color: "#e08a8a", marginBottom: 16 }}>{error}</div>
+            )}
 
-          <button
-            onClick={handleSubmit}
-            style={{ width: "100%", marginTop: 8, padding: "15px", background: `linear-gradient(135deg,${GOLD} 0%,${GOLD_DIM} 100%)`, border: "none", color: BLACK, fontFamily: "'Cinzel',serif", fontSize: 11, letterSpacing: 4, fontWeight: 700, cursor: "pointer", boxShadow: `0 4px 28px rgba(201,168,76,0.22)`, transition: "box-shadow 0.3s" }}
-            onMouseEnter={e => e.target.style.boxShadow = `0 4px 48px rgba(201,168,76,0.5)`}
-            onMouseLeave={e => e.target.style.boxShadow = `0 4px 28px rgba(201,168,76,0.22)`}>
-            SEND ENQUIRY
-          </button>
+            <button
+              type="submit"
+              style={{ width: "100%", marginTop: 8, padding: "15px", background: `linear-gradient(135deg,${GOLD} 0%,${GOLD_DIM} 100%)`, border: "none", color: BLACK, fontFamily: "'Cinzel',serif", fontSize: 11, letterSpacing: 4, fontWeight: 700, cursor: "pointer", boxShadow: `0 4px 28px rgba(201,168,76,0.22)`, transition: "box-shadow 0.3s" }}
+              onMouseEnter={e => e.target.style.boxShadow = `0 4px 48px rgba(201,168,76,0.5)`}
+              onMouseLeave={e => e.target.style.boxShadow = `0 4px 28px rgba(201,168,76,0.22)`}>
+              SEND ENQUIRY
+            </button>
+          </form>
 
           {/* Quick nearby highlights inside form area */}
           <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid rgba(201,168,76,0.09)" }}>
@@ -1150,7 +1185,7 @@ function LocationSection() {
               ["🛍️", "Nike, Bata, Reliance Trends", "5 min walk"],
             ].map(([icon, name, dist]) => (
               <div key={name} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid rgba(201,168,76,0.05)" }}>
-                <span style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13, filter: GOLD_EMOJI ,color: "rgba(245,215,142,0.5)" }}>{icon} {name}</span>
+                <span style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: 13, color: "rgba(245,215,142,0.5)" }}><span aria-hidden="true" style={{filter: GOLD_EMOJI}}>{icon}</span> {name}</span>
                 <span style={{ fontFamily: "'Cinzel',serif", fontSize: 8, letterSpacing: 1, color: GOLD_DIM }}>{dist}</span>
               </div>
             ))}
@@ -1165,7 +1200,7 @@ function LocationSection() {
 function Footer() {
   return (
     <footer style={{ padding: "44px 24px", background: "#050505", borderTop: "1px solid rgba(201,168,76,0.1)", textAlign: "center" }}>
-      <span style={{ fontSize: 26, filter: `drop-shadow(0 0 5px ${GOLD})`, display: "block", marginBottom: 12 }}>ॐ</span>
+      <span aria-hidden="true" style={{ fontSize: 26, filter: `drop-shadow(0 0 5px ${GOLD})`, display: "block", marginBottom: 12 }}>ॐ</span>
       <div style={{ fontFamily: "'Cinzel',serif", fontSize: 13, color: GOLD, letterSpacing: 4, marginBottom: 7 }}>OM NIRAMAYAM</div>
       <div style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: 13, color: "rgba(245,215,142,0.27)", marginBottom: 8 }}>Dwarka Sector 7, New Delhi</div>
       {/* GEO footer text — visible to crawlers */}
